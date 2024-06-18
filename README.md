@@ -7,6 +7,10 @@ HOSTNAME=$(hostname)
 OS="${NAME} ${VERSION}"
 UPTIME=$(uptime -p)
 
+# Hardware Information
+CPU_INFO=$(lshw -class processor | grep -E "product|vendor" | sed 's/ *//;s/: /: /')
+
+
 # System Report Output
 cat <<EOF
 
@@ -17,3 +21,7 @@ System Information
 Hostname: $HOSTNAME
 OS: $OS
 Uptime: $UPTIME
+
+Hardware Information
+--------------------
+CPU: $CPU_INFO
