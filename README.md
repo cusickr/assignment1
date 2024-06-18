@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # System Information
+USERNAME=$(whoami)
+CURRENT_DATETIME=$(date '+%Y-%m-%d %H:%M:%S')
 HOSTNAME=$(hostname)
 OS="${NAME} ${VERSION}"
 UPTIME=$(uptime -p)
