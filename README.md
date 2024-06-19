@@ -9,6 +9,8 @@ UPTIME=$(uptime -p)
 
 # Hardware Information
 CPU_INFO=$(lshw -class processor | grep -E "product|vendor" | sed 's/ *//;s/: /: /')
+CPU_SPEED=$(lscpu | grep "MHz" | awk -F: '{print $2}')
+VIDEO_CARD=$(lshw -class display | grep product | sed 's/.*product: //')
 
 
 # System Report Output
@@ -25,3 +27,5 @@ Uptime: $UPTIME
 Hardware Information
 --------------------
 CPU: $CPU_INFO
+Speed: $CPU_SPEED
+Video: $VIDEO_CARD
