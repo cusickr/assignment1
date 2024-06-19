@@ -18,6 +18,7 @@ VIDEO_CARD=$(lshw -class display | grep product | sed 's/.*product: //')
 FQDN=$(hostname -f)
 HOST_IP=$(hostname -I | awk '{print $1}')
 GATEWAY_IP=$(ip r | grep default | awk '{print $3}')
+DNS_SERVER=$(resolvectl status | grep 'DNS Servers' | awk '{print $3}')
 INTERFACE_NAME=$(ip a | awk '/state UP/ {print $2}' | sed 's/://')
 INTERFACE_INFO=$(lshw -class network | grep "logical name" | awk '{print $3}')
 INTERFACE_IP=$(ip a show $INTERFACE_NAME | grep 'inet ' | awk '{print $2}')
@@ -48,6 +49,7 @@ Network Information
 FQDN: $FQDN
 Host Address: $HOST_IP
 Gateway IP: $GATEWAY_IP
+DNS Server: $DNS_SERVER
 InterfaceName: $INTERFACE_NAME ($INTERFACE_INFO)
 IP Address: $INTERFACE_IP
 
