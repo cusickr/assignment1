@@ -17,6 +17,7 @@ VIDEO_CARD=$(lshw -class display | grep product | sed 's/.*product: //')
 # Network Information
 FQDN=$(hostname -f)
 HOST_IP=$(hostname -I | awk '{print $1}')
+GATEWAY_IP=$(ip r | grep default | awk '{print $3}')
 
 
 # System Report Output
@@ -42,4 +43,5 @@ Network Information
 -------------------
 FQDN: $FQDN
 Host Address: $HOST_IP
+Gateway IP: $GATEWAY_IP
 
