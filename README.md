@@ -14,6 +14,10 @@ RAM_SIZE=$(free -h | awk '/^Mem:/{print $2}')
 DISKS=$(lsblk -o NAME,MODEL,SIZE -d | tail -n +2 | awk '{print "Disk: "$2 " " $3}')
 VIDEO_CARD=$(lshw -class display | grep product | sed 's/.*product: //')
 
+# Network Information
+FQDN=$(hostname -f)
+HOST_IP=$(hostname -I | awk '{print $1}')
+
 
 # System Report Output
 cat <<EOF
@@ -33,3 +37,9 @@ Speed: $CPU_SPEED
 RAM: $RAM_SIZE
 Disks: $DISKS
 Video: $VIDEO_CARD
+
+Network Information
+-------------------
+FQDN: $FQDN
+Host Address: $HOST_IP
+
