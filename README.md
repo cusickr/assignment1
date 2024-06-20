@@ -1,4 +1,6 @@
 #!/bin/bash
+# Richard Cusick 200560006
+# Assignment 1
 
 # System Information
 USERNAME=$(whoami)
