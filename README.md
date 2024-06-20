@@ -23,6 +23,10 @@ INTERFACE_NAME=$(ip a | awk '/state UP/ {print $2}' | sed 's/://')
 INTERFACE_INFO=$(lshw -class network | grep "logical name" | awk '{print $3}')
 INTERFACE_IP=$(ip a show $INTERFACE_NAME | grep 'inet ' | awk '{print $2}')
 
+# System Status
+USERS_LOGGED_IN=$(who | awk '{print $1}' | sort | uniq | tr '\n' ', ')
+DISK_SPACE=$(df -h --output=target,avail | tail -n +2 | awk '{print $1 ": " $2}' | tr '\n' ', ')
+PROCESS_COUNT=$(ps aux | wc -l)
 
 
 # System Report Output
@@ -52,4 +56,10 @@ Gateway IP: $GATEWAY_IP
 DNS Server: $DNS_SERVER
 InterfaceName: $INTERFACE_NAME ($INTERFACE_INFO)
 IP Address: $INTERFACE_IP
+
+System Status
+-------------
+Users Logged In: ${USERS_LOGGED_IN%,}
+Disk Space: ${DISK_SPACE%,}
+Process Count: $PROCESS_COUNT
 
