@@ -27,6 +27,8 @@ INTERFACE_IP=$(ip a show $INTERFACE_NAME | grep 'inet ' | awk '{print $2}')
 USERS_LOGGED_IN=$(who | awk '{print $1}' | sort | uniq | tr '\n' ', ')
 DISK_SPACE=$(df -h --output=target,avail | tail -n +2 | awk '{print $1 ": " $2}' | tr '\n' ', ')
 PROCESS_COUNT=$(ps aux | wc -l)
+LOAD_AVERAGES=$(uptime | awk -F'[a-z]:' '{ print $2 }' | sed 's/,//g')
+MEMORY_ALLOCATION=$(free -h)
 
 
 # System Report Output
@@ -62,4 +64,6 @@ System Status
 Users Logged In: ${USERS_LOGGED_IN%,}
 Disk Space: ${DISK_SPACE%,}
 Process Count: $PROCESS_COUNT
+Load Averages: $LOAD_AVERAGES
+Memory Allocation: $MEMORY_ALLOCATION
 
