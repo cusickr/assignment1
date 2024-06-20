@@ -29,6 +29,8 @@ DISK_SPACE=$(df -h --output=target,avail | tail -n +2 | awk '{print $1 ": " $2}'
 PROCESS_COUNT=$(ps aux | wc -l)
 LOAD_AVERAGES=$(uptime | awk -F'[a-z]:' '{ print $2 }' | sed 's/,//g')
 MEMORY_ALLOCATION=$(free -h)
+LISTENING_PORTS=$(ss -ltn | awk '{print $4}' | tail -n +2 | tr '\n' ', ')
+UFW_RULES=$(sudo ufw status numbered | tail -n +1)
 
 
 # System Report Output
@@ -66,4 +68,7 @@ Disk Space: ${DISK_SPACE%,}
 Process Count: $PROCESS_COUNT
 Load Averages: $LOAD_AVERAGES
 Memory Allocation: $MEMORY_ALLOCATION
+Listening Network Ports: ${LISTENING_PORTS%,}
+UFW Rules: $UFW_RULES
 
+EOF
